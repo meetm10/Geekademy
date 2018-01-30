@@ -46,8 +46,6 @@
 		}
 
 		.card {
-			margin-left: 10px;
-			margin-right: 10px;	
 			background-color: #e3e5e3;
 		}
 
@@ -59,6 +57,12 @@
 			margin: 0;
 			padding: 30; 
 		}
+
+		.ad {
+			margin: 10px;
+			background-color: orange;
+			height: 45%;
+		}
 	</style>
 	<body>
 		<h1 align="center" name = "top" class="jumbotron text-center"> Geekademy </h1>
@@ -67,14 +71,16 @@
 			<li><a href="Index.html" class="active"> Home </a></li>
 			<li><a href="Algorithms.html"> Algorithms </a></li>
 			<li><a href="Data_Structure.html"> Data Structures </a></li>
-			<li><a href="Languages.html"> Programming Languages</a></li>
 			<li><a href="Subjects.html"> Computer Science Subjects </a></li>
 			<li><a href=""> Interview </a></li>
 			<li><a href="Login.html"> Login </a></li>
 
 		</ul><br>
-
-		<div class="card">
+		<div class="row">
+		<div class="col-sm-2">
+			<div class="ad">Ad to the left #1</div>
+		</div>
+		<div class="col-sm-8 card">
 		<div class="text">
 		<section>
 			<h4 style="color: green"> Featured Article </h4>
@@ -91,10 +97,16 @@
 			(9)<sub>10</sub> = (1001)<sub>2</sub></p>
 		</section>
 		</div></div>
-
-		<br>
-
-		<div class="card">
+		<div class="col-sm-2">
+			<div class="ad"> Ad to the right #1</div>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="col-sm-2">
+			<div class="ad"> Ad to the left #2</div>
+		</div>
+		<div class="col-sm-8 card">
 		<div class="text">
 		<section>
 			<h4 style="color: green"> Featured Article </h4>
@@ -112,6 +124,10 @@
 			Output : 35</p>
 		</section>
 		</div></div>
+		<div class="col-sm-2">
+			<div class="ad"> Ad to the right #2</div>
+		</div>
+		</div>
 		<hr>
 
 		<footer>
