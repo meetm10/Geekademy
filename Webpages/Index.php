@@ -1,4 +1,19 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<!DOCTYPE html>
 <html>
+	<script>
+	function httpGet(theUrl)
+	{
+    	var xmlHttp = new XMLHttpRequest();
+    	xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    	xmlHttp.send( null );
+    	return xmlHttp.responseText;
+	}
+
+	</script>
 	<header>
 		<title> Unity Learn | Home</title>
 		<meta charset="utf-8">
@@ -64,7 +79,7 @@
 			height: 45%;
 		}
 	</style>
-	<body>
+	<body onload="httpGet('http://api.stackexchange.com/2.1/questions/34417209?site=stackoverflow')">
 		<h1 align="center" name = "top" class="jumbotron text-center"> Geekademy </h1>
 
 		<ul class="nav">
@@ -79,9 +94,22 @@
 		<div class="row">
 		<div class="col-sm-2">
 			<div class="ad">Ad to the left #1</div>
-			<div><?php $response = file_get_contents("http://api.stackexchange.com/2.1/questions/34427209?site=stackoverflow");
-echo $response;
-?></div>
+			<div>
+			<?php 
+				$response = file_get_contents("http://api.stackexchange.com/2.1/questions/34417209?site=stackoverflow");
+				$file = 'ads.json';
+				file_put_contents($file, $response);
+
+				$str = file_get_contents('ads.json');
+				$json = json_decode($str, true);
+				echo $json
+				/*echo json_decode($response);
+				$res = json_decode($response);
+				echo gettype($res);
+				*/
+			?>
+	
+			</div>
 		</div>
 		<div class="col-sm-8 card">
 		<div class="text">
