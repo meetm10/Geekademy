@@ -1,8 +1,6 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <html>
 	<script>
 	function httpGet(theUrl)
@@ -14,6 +12,49 @@ ini_set('display_errors', 1);
 	}
 
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		$(function() {
+		$(".vote").click(function() 
+		{
+		var id = $(this).attr("id");
+		var name = $(this).attr("name");
+		var dataString = 'id='+ id ;
+		var parent = $(this);
+		if(name=='up')
+		{
+		$.ajax({
+		   type: "POST",
+		   url: "up_vote.php",
+		   data: dataString,
+		   cache: false,
+
+		   success: function(html)
+		   {
+		    parent.html(html);
+		  
+		  }  });
+		}
+		else
+		{
+		$.ajax({
+		   type: "POST",
+		   url: "down_vote.php",
+		   data: dataString,
+		   cache: false,
+
+		   success: function(html)
+		   {
+		       parent.html(html);
+		  }  
+		 });
+		}
+		return false;
+			});
+
+		});
+		</script>
+
 	<header>
 		<title> Unity Learn | Home</title>
 		<meta charset="utf-8">
@@ -62,6 +103,7 @@ ini_set('display_errors', 1);
 
 		.card {
 			background-color: #e3e5e3;
+			
 		}
 
 		.text {
@@ -78,7 +120,19 @@ ini_set('display_errors', 1);
 			background-color: orange;
 			height: 45%;
 		}
+
+		.up{height:36px; width:56px; font-size:18px; text-align:center; background:#00AF09; margin-bottom:2px; margin:10px auto}
+		.up a{color:#fff;text-decoration:none; line-height:1.8em}
+
+		.down{height:36px; width:56px; font-size:18px; text-align:center; background:#EC383B; margin-bottom:2px; margin:10px auto; margin-top:20px}
+		.down a{color:#FFFFFF;text-decoration:none; line-height:1.8em}
+
+		.box1{float:left; height:40px; width:100px; color:#000}
+
+		.box2{float:left; width:700px; text-align:left;margin-left:30px;height:350px;margin-top:10px;font-size:16px; color:#000; }
+
 	</style>
+
 	<body onload="httpGet('http://api.stackexchange.com/2.1/questions/34417209?site=stackoverflow')">
 		<h1 align="center" name = "top" class="jumbotron text-center"> Geekademy </h1>
 
@@ -111,52 +165,44 @@ ini_set('display_errors', 1);
 	
 			</div>
 		</div>
+
 		<div class="col-sm-8 card">
-		<div class="text">
-		<section>
-			<h4 style="color: green"> Featured Article </h4>
-			<h2>Print numbers having first and last bits as the only set bits</h2>
-			<p>Given a positive integer n. The problem is to print numbers in the range 1 to n having first and last bits as the only set bits. <br> <br>
 
-			Examples: <br> <br>
+		<?php
+		include('config.php');
+		$sql=mysql_query("SELECT * FROM voting ");
+		while($row=mysql_fetch_array($sql)) // For every row in table i.e. for every text/article show article alongwith upvote/downvote system
+		{
+		$article_id=$row['article_id'];
+		$heading=$row['heading'];
+		$text=$row['text'];
+		$up=$row['upvote'];
+		$down=$row['downvote'];
+		?>
+		<h3>Featured Article</h3>
+		<div class="box1"> 
+		<div class='up'><a href="" class="vote" id="<?php echo $article_id; ?>" name="up"><?php echo $up; ?> &and;</a></div>
+	    <p style="color:#777; margin-left:20px; margin-top:0px">Like(s)</p>
+	    
+		<div class='down'><a href="" class="vote" id="<?php echo $article_id; ?>" name="down"><?php echo $down; ?> &or;</a></div>
+	    <p style="color:#777; margin-left:20px; margin-top:0px">Dislike(s)</p>
+		</div>
 
-			Input : n = 10 <br>
-			Output : 1 3 5 9 <br> <br>
-			(1)<sub>10</sub> = (1)<sub>2</sub><br>
-			(3)<sub>10</sub> = (11)<sub>2</sub><br>
-			(5)<sub>10</sub> = (101)<sub>2</sub><br>
-			(9)<sub>10</sub> = (1001)<sub>2</sub></p>
-		</section>
-		</div></div>
+		<div class='box2' ><p style="color:#777">
+		<?php 
+		echo "<h4>".$heading."</h4>"; 
+		echo "<p>".$text."</p><br>"; 
+		?>
+		
+		<br></div></p>
+
+		<?php
+		}
+		?>
+
+		</div>
 		<div class="col-sm-2">
 			<div class="ad"> Ad to the right #1</div>
-		</div>
-		</div>
-		
-		<div class="row">
-		<div class="col-sm-2">
-			<div class="ad"> Ad to the left #2</div>
-		</div>
-		<div class="col-sm-8 card">
-		<div class="text">
-		<section>
-			<h4 style="color: green"> Featured Article </h4>
-			<h2>Find maximum power of a number that divides a factorial</h2>
-			<p>Given two numbers, fact and n, find the largest power of n that divides fact! (Factorial of fact). <br> <br>
-
-			Examples: <br> <br>
-
-			Input : fact = 5, n = 2 <br>
-			Output : 3 <br> <br>
-			Value of 5! is 120. <br>
-			The largest power of 2 that divides 120 is 8 (or 23) <br>
-
-			Input : fact = 146, n = 15
-			Output : 35</p>
-		</section>
-		</div></div>
-		<div class="col-sm-2">
-			<div class="ad"> Ad to the right #2</div>
 		</div>
 		</div>
 		<hr>
