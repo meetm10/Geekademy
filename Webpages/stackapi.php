@@ -11,6 +11,7 @@
 				/*echo json_decode($response);
 				$res = json_decode($response);
 				echo gettype($res);
-				
-				echo "Hello World";
+*/				
+				echo "Hello World
+
 ?>
