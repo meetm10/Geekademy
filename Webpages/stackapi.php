@@ -10,4 +10,4 @@
 				$res = json_decode($response);
 				echo gettype($res);
 				*/
-			?>
+?>
