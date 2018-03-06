@@ -46,15 +46,29 @@
 
 
 
-	$url = "http://api.glassdoor.com/api/api.htm?v=1&format=json&t.p=120&t.k=fz6JLNDfgVs&action=employers&q=pharmaceuticals&useragent=Mozilla/%2F4.0";
-
-	$url_old = "http://api.stackexchange.com/2.1/questions/34417209?site=stackoverflow";
+	$url = "http://api.stackexchange.com/2.2/questions/featured?site=stackoverflow";
 	
 	
 	$response=get_fcontent($url);
 	
 	$json_obj = json_decode($response[0]);
-	echo"response_status".$json_obj->status."<BR>";
+	
+	$i = 0;
+	$num_questions = 0;
+	echo "<h3>Can you answer these Questions?</h3>";
+
+	while($i <= 50 && $num_questions <= 5 ) 
+	{
+
+		$question_title = $json_obj->items[$i]->title;
+		$question_link = $json_obj->items[$i]->link;
+		
+		if (strlen($question_title) <= 50)
+			echo"<p><a href = \"".$question_link."\"> Q:".$question_title."</a></p>";
+			$num_questions++;
+
+    	$i++;
+	} 
 	
 
 ?>
