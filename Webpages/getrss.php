@@ -29,7 +29,7 @@ $channel_desc = $channel->getElementsByTagName('description')
 echo("<p><a href='" . $channel_link
   . "'>" . $channel_title . "</a>");
 echo("<br>");
-echo($channel_desc . "</p>");
+// echo($channel_desc . "</p>");
 
 //get and output "<item>" elements
 $x=$xmlDoc->getElementsByTagName('item');
@@ -40,9 +40,9 @@ for ($i=0; $i<=2; $i++) {
   ->item(0)->childNodes->item(0)->nodeValue;
   $item_desc=$x->item($i)->getElementsByTagName('description')
   ->item(0)->childNodes->item(0)->nodeValue;
-  echo ("<p><a href='" . $item_link
-  . "'>" . $item_title . "</a>");
-  echo ("<br>");
+  // echo ("<p><a href='" . $item_link
+  // . "'>" . $item_title . "</a>");
+  echo ("<hr>");
   echo ($item_desc . "</p>");
 }
 ?>

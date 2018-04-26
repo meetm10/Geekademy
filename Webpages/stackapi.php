@@ -57,14 +57,14 @@
 	$num_questions = 0;
 	echo "<h3>Can you answer these Questions?</h3>";
 
-	while($i <= 50 && $num_questions <= 5 ) 
+	while($i <= 150 && $num_questions <= 5 ) 
 	{
 
 		$question_title = $json_obj->items[$i]->title;
 		$question_link = $json_obj->items[$i]->link;
 		
 		if (strlen($question_title) <= 50)
-			echo"<p><a href = \"".$question_link."\"> Q:".$question_title."</a></p>";
+			echo"<p><a href = \"".$question_link."\"> Q: ".$question_title."</a></p><hr>";
 			$num_questions++;
 
     	$i++;
@@ -72,3 +72,5 @@
 	
 
 ?>
+<em style="font-size: 12px">Powered by</em><img src="stackoverflow.png" width="96">
+</html>
